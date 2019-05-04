@@ -1,5 +1,35 @@
-/**index.wxss**/
-.title {
-  margin-top: 300rpx;
+/*width 750rpx, height 760rpx
+760=174+280+56+250*/
+.temp {
   text-align: center;
+  font-size: 200rpx;
+  line-height: 280rpx;
+  opacity: 0.8;
+}
+
+.weather {
+  text-align: center;
+  font-size: 40rpx;
+  line-height: 56rpx;
+  opacity: 0.65;
+}
+
+/*
+Check these two articles:
+http://zh.learnlayout.com/position.html
+https://css-tricks.com/absolute-positioning-inside-relative-positioning/
+*/
+.weather-wrapper {
+  padding-top: 174rpx;
+  padding-bottom: 250rpx;
+  position: relative;
+}
+
+.weather-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
