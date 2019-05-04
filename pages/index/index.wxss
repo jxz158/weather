@@ -1,0 +1,5 @@
+/**index.wxss**/
+.title {
+  margin-top: 300rpx;
+  text-align: center;
+}
