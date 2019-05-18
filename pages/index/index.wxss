@@ -33,3 +33,54 @@ https://css-tricks.com/absolute-positioning-inside-relative-positioning/
   height: 100%;
   z-index: -1;
 }
+
+.timetips {
+  /*Using display: flex if the subviews are displayed horizontally*/
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  margin-top: 40rpx;
+  margin-bottom: 45rpx;
+}
+
+.timetips-icon {
+  margin-right: 10rpx;
+  width: 36rpx;
+  height: 28rpx;
+}
+
+.timetips-text {
+  /*Best practice, line-height is 1.4 times font-size*/
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.5;
+}
+
+.forcast-list{
+  display: flex;
+}
+
+.forcast-item{
+  display:flex;
+  flex-direction: column;
+  flex-shrink: 0; /* force not to shrink*/
+  width: 120rpx;
+  align-items:center; /* center all 3 subviews*/
+}
+
+.forecast-time{
+  font-size: 30rpx;
+  line-height: 42rpx;
+}
+
+.forecast-weather{
+  margin-top: 50rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.forecast-temp{
+  margin-top: 46rpx;
+  font-size: 40rpx;
+  line-height: 56rpx;
+}

@@ -20,7 +20,8 @@ Page({
   data: {
     nowTemp: '',
     nowWeather: '',
-    nowWeatherBackground:''
+    nowWeatherBackground:'',
+    hourlyWeather: []
   },
   onLoad() {
     this.getNow()
@@ -40,25 +41,46 @@ Page({
       },
       success: res => { // The statement success(res){} does not work. The program complains about null error of the variable this
         let result = res.data.result
-        let temp = result.now.temp
-        let weather = result.now.weather
-        this.setData({
-          nowTemp: temp + '°',
-          nowWeather: weatherMap[weather],
-          nowWeatherBackground: '/images/' + weather + '-bg.png'
-        })
-        wx.setNavigationBarColor({
-          frontColor: '#ffffff',
-          backgroundColor: weatherColorMap[weather],
-          animation: {
-            duration: 400,
-            timingFunc: 'easeIn'
-          }
-        })
+        this.setNow(result)
+        this.setHourlyWeather(result)
       },
       complete: () => {
         callback && callback() // if callback function exists, execute callback()
       }
+    })
+  },
+  setNow(result){
+    let temp = result.now.temp
+    let weather = result.now.weather
+    this.setData({
+      nowTemp: temp + '°',
+      nowWeather: weatherMap[weather],
+      nowWeatherBackground: '/images/' + weather + '-bg.png'
+    })
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: weatherColorMap[weather],
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
+  },
+  setHourlyWeather(result){
+    // set forecast
+    let forecast = result.forecast
+    let nowHour = new Date().getHours()
+    let hourlyWeather = []
+    for (let i = 0; i < 8; i += 1) {
+      hourlyWeather.push({
+        time: (nowHour + i * 3) % 24 + '时',
+        iconPath: '/images/' + forecast[i].weather + '-icon.png',
+        temp: forecast[i].temp + '°'
+      })
+    }
+    hourlyWeather[0].time = '现在'
+    this.setData({
+      hourlyWeather: hourlyWeather
     })
   }
 })
